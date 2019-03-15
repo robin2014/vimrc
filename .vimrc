@@ -202,9 +202,9 @@ filetype plugin indent on    " 必须 加载vim自带和插件相应的语法和
 ""                   easycomplete配置                      *
 "*****************************************************
 "补全，向上
-imap <S-j>   <Plug>EasyCompTabTrigger 
+imap <C-j>   <Plug>EasyCompTabTrigger 
 "补全，向下
-imap <S-k> <Plug>EasyCompShiftTabTrigger
+imap <C-k> <Plug>EasyCompShiftTabTrigger
 "补全提示背景
 let g:pmenu_scheme = 'dark'
 
