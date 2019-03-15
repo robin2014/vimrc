@@ -148,10 +148,18 @@ Plugin 'scrooloose/nerdcommenter' "多行注释，leader键+cc生成, leader+cu�
 Plugin 'scrooloose/nerdtree'  "文件浏览
 Plugin 'Xuyuanp/nerdtree-git-plugin' "待配置
 Plugin 'vim-scripts/taglist.vim'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+"SnipMate 携带的四个插件
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+"EasyComplete 插件和 Dictionary 词表
+Plugin 'jayli/vim-easycomplete'
+Plugin 'jayli/vim-dictionary'
+
 " 待研究安装
 "Bundle 'SuperTab'
 "Bundle 'Vim-JavaScript'
@@ -189,6 +197,13 @@ filetype plugin indent on    " 必须 加载vim自带和插件相应的语法和
 " 查阅 :h vundle 获取更多细节和wiki以及FAQ
 " 将你自己对非插件片段放在这行之后:
 "VUNDLE CONFIG　END----------------------------------------------------------------------
+
+"*****************************************************
+""                   easycomplete配置                      *
+"*****************************************************
+imap <S-j>   <Plug>EasyCompTabTrigger
+imap <S-k> <Plug>EasyCompShiftTabTrigger
+let g:pmenu_scheme = 'dark'
 
 "*****************************************************
 ""                   taglist配置                      *
@@ -295,62 +310,60 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
-" 跳转?
-"*****************************************************
-"           YouCompleteMe配置                        *
-"*****************************************************
-"重启 :YcmRestartServer
-" 自动选择补全Tab键,set paste后tab键盘失效
-set pastetoggle=<F5> 
-set completeopt=longest,menu    "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-let mapleader = ","  "leader映射为逗号“，”
-let g:ycm_server_python_interpreter='/usr/bin/python'
-let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py' "配置默认的ycm_extra_conf.py
-let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
-let g:ycm_complete_in_comments = 1  "在注释输入中也能补全
-let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
-let g:ycm_use_ultisnips_completer = 1 "提示UltiSnips
-let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
-let g:ycm_collect_identifiers_from_tag_files = 1 "使用ctags生成的tags文件
-let g:ycm_confirm_extra_conf=0  " 打开vim时不再询问是否加载ycm_extra_conf.py配置
-let g:ycm_key_invoke_completion='<C-a>' " ctrl + a 触发补全
-let g:ycm_goto_buffer_command = 'horizontal-split' " 跳转到定义处, 分屏打开
-let g:ycm_min_num_of_chars_for_completion = 1
-let g:ycm_autoclose_preview_window_after_completion=1
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-"nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>gd :YcmCompleter GoToDefinition<CR>
-" nnoremap <silent> gb :YcmCompleter GoToDefinitionElseDeclaration<CR>   "按gb 会跳转到定义
-map <F4> : YcmDiags<CR>
-
-"*****************************************************
-"           Syntastic配置                            *
-"*****************************************************
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_cpp_include_dirs = ['/usr/include/','/usr/local/include/','/usr/local/mfw/include','/usr/local/mfw/3party-include/','/usr/include/sys', '/home/robin/Server/build/GameServer/SdpData']
-let g:syntastic_cpp_remove_include_errors = 1
-let g:syntastic_cpp_check_header = 1
-"let g:syntastic_cpp_compiler = 'clang++'
-"let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libstdc++'
-"set error or warning signs
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '⚠'
-"whether to show balloons
-let g:syntastic_enable_balloons = 1
-
-"*****************************************************
-"           Ultisnips配置                            *
-"*****************************************************
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-f>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
-"let g:UltiSnipsListSnippets="<c-e>"
-" let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your window.
-
-
+"" 跳转?
+""*****************************************************
+""           YouCompleteMe配置                        *
+""*****************************************************
+""重启 :YcmRestartServer
+"" 自动选择补全Tab键,set paste后tab键盘失效
+"set pastetoggle=<F5> 
+"set completeopt=longest,menu    "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+"let mapleader = ","  "leader映射为逗号“，”
+"let g:ycm_server_python_interpreter='/usr/bin/python'
+"let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py' "配置默认的ycm_extra_conf.py
+"let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
+"let g:ycm_complete_in_comments = 1  "在注释输入中也能补全
+"let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
+"let g:ycm_use_ultisnips_completer = 1 "提示UltiSnips
+"let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
+"let g:ycm_collect_identifiers_from_tag_files = 1 "使用ctags生成的tags文件
+"let g:ycm_confirm_extra_conf=0  " 打开vim时不再询问是否加载ycm_extra_conf.py配置
+"let g:ycm_key_invoke_completion='<C-a>' " ctrl + a 触发补全
+"let g:ycm_goto_buffer_command = 'horizontal-split' " 跳转到定义处, 分屏打开
+"let g:ycm_min_num_of_chars_for_completion = 1
+"let g:ycm_autoclose_preview_window_after_completion=1
+"nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+""nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
+"nnoremap <leader>gd :YcmCompleter GoToDefinition<CR>
+"" nnoremap <silent> gb :YcmCompleter GoToDefinitionElseDeclaration<CR>   "按gb 会跳转到定义
+"map <F4> : YcmDiags<CR>
+"
+""*****************************************************
+""           Syntastic配置                            *
+""*****************************************************
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_cpp_include_dirs = ['/usr/include/','/usr/local/include/','/usr/local/mfw/include','/usr/local/mfw/3party-include/','/usr/include/sys', '/home/robin/Server/build/GameServer/SdpData']
+"let g:syntastic_cpp_remove_include_errors = 1
+"let g:syntastic_cpp_check_header = 1
+""let g:syntastic_cpp_compiler = 'clang++'
+""let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libstdc++'
+""set error or warning signs
+"let g:syntastic_error_symbol = '✗'
+"let g:syntastic_warning_symbol = '⚠'
+""whether to show balloons
+"let g:syntastic_enable_balloons = 1
+"
+""*****************************************************
+""           Ultisnips配置                            *
+""*****************************************************
+"let g:UltiSnipsExpandTrigger="<c-j>"
+"let g:UltiSnipsJumpForwardTrigger="<c-f>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+""let g:UltiSnipsListSnippets="<c-e>"
+"" let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your window.
