@@ -1,13 +1,14 @@
 使用步骤:
-    0:git clone https://github.com/robin2014/vimrc.git && cd vimrc
-    1: cp ./.vimrc ~/.vimrc
-    2:安装Vundle,git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    3:复制脚本generateCscopeAndCtags.sh到相应目录,修改脚本中相应参数，文件位置，生成tags文件
-    4:修改~/.vimrc,修改ctags,cscope相关目录
-    5: :PluginInstall     - 安装插件,追加 `!` 用以更新或使用 :PluginUpdate
+    0.vim版本要8.0以上，实测vim7.4会有报错，升级8.1后正常
+    0.git clone https://github.com/robin2014/vimrc.git && cd vimrc
+    1. cp ./.vimrc ~/.vimrc
+    2.安装Vundle,git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    3.复制脚本generateCscopeAndCtags.sh到相应目录,修改脚本中相应参数，文件位置，生成tags文件
+    4.修改~/.vimrc,修改ctags,cscope相关目录
+    5. :PluginInstall     - 安装插件,追加 `!` 用以更新或使用 :PluginUpdate
 
 备注:
-    1:Vundle插件使用介绍
+    1.Vundle插件使用介绍
         注意:
         插件有三种类型:
             1. Github上vim-scripts仓库的插件
@@ -76,5 +77,5 @@
             列出所有插件BundleList
             查找插件BundleSearch
 
-    2:自动补全插件安装使用介绍,(已经包含在安装插件中):https://github.com/jayli/vim-easycomplete
+    2.自动补全插件安装使用介绍,(已经包含在安装插件中):https://github.com/jayli/vim-easycomplete
 
