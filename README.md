@@ -1,5 +1,5 @@
 使用步骤:
-    0.vim版本要8.0以上，实测vim7.4会有报错，升级8.1后正常
+    0.vim版本要8.0以上，实测vim7.4会有报错，升级8.1后正常,(升级vim搜索源码升级,参考一下备注)
     0.git clone https://github.com/robin2014/vimrc.git && cd vimrc
     1. cp ./.vimrc ~/.vimrc
     2.安装Vundle,git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -76,6 +76,64 @@
             更新插件BundleUpdate
             列出所有插件BundleList
             查找插件BundleSearch
+
+    3.源码升级vim
+    1.安装相关库
+		sudo yum install -y ruby ruby-devel lua lua-devel luajit \
+			luajit-devel ctags git python python-devel \
+			python3 python3-devel tcl-devel \
+			perl perl-devel perl-ExtUtils-ParseXS \
+			perl-ExtUtils-XSpp perl-ExtUtils-CBuilder \
+			perl-ExtUtils-Embed
+		2.Remove vim if you have it already.(可以不删除，安装时./configure  --prefix=/usr/local指定不一样的目录 用户自己的目录)
+		sudo yum -y remove vim vim-runtime gvim
+		3.clone vim源码，configure
+		cd ~
+		git clone https://github.com/vim/vim.git
+		cd vim
+		./configure --with-features=huge \
+					--enable-multibyte \
+					--enable-rubyinterp=yes \
+					--enable-pythoninterp=yes \
+					--with-python-config-dir=/usr/lib/python2.7/config \(替换成本机真实的pythonconfig地址，2和3 有哪个填哪个)
+					--enable-python3interp=yes \
+					--with-python3-config-dir=/usr/lib/python3.5/config \
+					--enable-perlinterp=yes \
+					--enable-luainterp=yes \
+					--enable-gui=gtk2 \
+					--enable-cscope \
+					--prefix=/usr/local 指定将要安装到的路径(自行创建)
+		make VIMRUNTIMEDIR=/usr/local/share/vim/vim80
+		example:
+		./configure --with-features=huge \
+					--enable-multibyte \
+					--enable-rubyinterp=yes \
+					--enable-pythoninterp=yes \
+					--with-python-config-dir=/usr/lib/python2.7/site-packages/config \
+					--enable-perlinterp=yes \
+					--enable-luainterp=yes \
+					--enable-gui=gtk2 \
+					--enable-cscope \
+					--prefix=/home/zhangyun/usr/local
+		configure错误，可能提示 checking for tgetent()... configure: error: NOT FOUND!
+				  You need to install a terminal library; for example ncurses   
+		安装库:     
+		yum  install  ncurses-devel
+		编译:
+		make VIMRUNTIMEDIR=/usr/local/share/vim/vim80(只对自己生效,安装/home/zhangyun/usr/local)
+		4.安装.
+		cd ~/vim
+		sudo make install
+		如果只对自己生效，一下可以省略，添加只对自己生效的bin/到PATH路径
+		5.Set vim as your default editor with update-alternatives.(是否可以不设置?,这里vim路径为前面prefix指定的)
+		sudo update-alternatives --install /usr/bin/editor editor /usr/local/bin/vim 1
+		sudo update-alternatives --set editor /usr/local/bin/vim
+		sudo update-alternatives --install /usr/bin/vi vi /usr/local/bin/vim 1
+		sudo update-alternatives --set vi /usr/local/bin/vim
+		6.也可以不管之前
+			关于vim的安装路径
+			默认新的vim是安在/usr/bin/local/中的，但是PATH中会首先找到/usr/bin/中旧的vim，所以不介意的话把旧的vim删了也可以，也可以输入下面的命令来使命令行中的vim指令指向 /usr/local/bin/vim 的程序
+			alias vim='/usr/local/bin/vim'    
 
     2.自动补全插件安装使用介绍,(已经包含在安装插件中):https://github.com/jayli/vim-easycomplete
 
